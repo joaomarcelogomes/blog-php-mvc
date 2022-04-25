@@ -1,0 +1,8 @@
+{
+  "name":"jm/blog",
+  "autoload":{
+    "psr-4":{
+      "Source\\":"src/"
+    }
+  }
+}

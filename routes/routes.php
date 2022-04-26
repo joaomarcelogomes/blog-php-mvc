@@ -5,6 +5,7 @@ require 'vendor/autoload.php';
 use \Source\Http\Router;
 use \Source\Http\Response;
 use \Source\Controller\HomeController;
+use \Source\Controller\PostController;
 
 //instância de novo router
 $router = new Router(URL);
@@ -17,9 +18,9 @@ $router->get('/', [
 ]);
 
 //rota sobre
-$router->get('/sobre', [
-  function() {
-    return new Response(200, 'sobre');
+$router->get('/post/{id}', [
+  function($id) {
+    return new Response(200, PostController::getPost($id));
   }
 ]);
 

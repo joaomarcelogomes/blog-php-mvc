@@ -14,7 +14,7 @@ class HomeController extends PageController {
       'posts' => PostController::getPosts()
     ]);
 
-   return parent::getPage('HOME', $content);
+   return parent::getPage('wap.blog', $content);
   }
 
 }

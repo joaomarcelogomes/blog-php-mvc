@@ -35,13 +35,20 @@ class Request {
   private array $queryParams = [];
 
   /**
+   * router da requisição
+   * @var Router
+   */
+  private Router $router;
+
+  /**
    * método construtor responsável por inicializar as variáveis
    */
-  public function __construct(){
+  public function __construct($router){
+   $this->router      = $router;
    $this->queryParams = $_GET ?? [];
-   $this->postVars = $_POST ?? [];
-   $this->method = $_SERVER['REQUEST_METHOD'] ?? '';
-   $this->headers = getallheaders();
+   $this->postVars    = $_POST ?? [];
+   $this->method      = $_SERVER['REQUEST_METHOD'] ?? '';
+   $this->headers     = getallheaders();
    $this->setUri();
   }
 
@@ -52,6 +59,10 @@ class Request {
    $xUri = explode('?', $_SERVER['REQUEST_URI']);
 
    $this->uri = $xUri[0];
+  }
+
+  public function getRouter(): Router {
+   return $this->router;
   }
 
   public function getUri(): string {

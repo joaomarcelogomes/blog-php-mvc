@@ -2,21 +2,6 @@
 
 require 'vendor/autoload.php';
 
-use \Source\Http\Router;
-use \Source\Http\Response;
+require 'cfg/config.php';
 
-$req = new Router('http://localhost:8080');
-
-$req->get('/', [
-  function() {
-    return new Response(200, 'OK');
-  }
-]);
-
-$req->get('/sobre', [
-  function() {
-    return new Response(200, 'sobre');
-  }
-]);
-
-$req->run()->sendResponse();
+require 'routes/routes.php';

@@ -5,11 +5,15 @@ use \Source\UI\View;
 
 class HomeController extends PageController {
 
+  /**
+   * método responsável por renderizar a home
+   * @return string
+   */
   public static function getHome(): string {
-   $content = View::render('pages/home', [
-     'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-   ]);
-  
+    $content = View::render('pages/home', [
+      'posts' => PostController::getPosts()
+    ]);
+
    return parent::getPage('HOME', $content);
   }
 

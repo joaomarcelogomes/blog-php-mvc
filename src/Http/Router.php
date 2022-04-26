@@ -157,11 +157,19 @@ class Router {
    * @param  array    $params
    * @return Response
    */
-  public function get(string $route, array $params = []){
+  public function get(string $route, array $params = []) {
     return $this->addRoute('GET', $route, $params);
   }
 
-  public function post(string $route, array $params = []){
+  public function post(string $route, array $params = []) {
     return $this->addRoute('POST', $route, $params);
+  }
+
+  public function put(string $route, array $params = []) {
+    return $this->addRoute('PUT', $route, $params);
+  }
+
+  public function delete(string $route, array $params = []) {
+    return $this->addRoute('DELETE', $route, $params);
   }
 }

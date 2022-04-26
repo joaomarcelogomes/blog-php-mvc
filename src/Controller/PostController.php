@@ -28,7 +28,7 @@ class PostController extends PageController {
       $content .= View::render('pages/posts/posts', [
         'id'      => $post->getId(),
         'title'   => $post->getTitle(),
-        'content' => substr($post->getContent(), 0, 500),
+        'content' => substr($post->getContent(), 0, 500) . '...',
         'date'    => strftime('%d de %B de %Y', strtotime($post->getDate())),
         'img'     => $post->getImg()
       ]);
@@ -47,6 +47,7 @@ class PostController extends PageController {
     $content = View::render('pages/posts/post', [
       'title'   => $post->getTitle(),
       'date'    => strftime('%B %d, %Y', strtotime($post->getDate())),
+      'img'     => $post->getImg(),
       'content' => $post->getContent()
     ]);
 

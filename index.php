@@ -13,4 +13,10 @@ $req->get('/', [
   }
 ]);
 
+$req->get('/sobre', [
+  function() {
+    return new Response(200, 'sobre');
+  }
+]);
+
 $req->run()->sendResponse();

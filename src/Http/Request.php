@@ -61,7 +61,7 @@ class Request {
   public function getHeaders(): array {
    return $this->headers;
   }
-  
+
   public function getPostVars(): array {
    return $this->postVars;
   }

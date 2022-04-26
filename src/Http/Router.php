@@ -1,59 +1,57 @@
 <?php
 
 namespace Source\Http;
-
-use \Exception;
 use \Closure;
+use \Exception;
 use \ReflectionFunction;
 
 class Router {
 
   /**
-   * request
+   * url completa da raíz do projeto
+   * @var string
+   */
+  private string $url = '';
+
+  /**
+   * prefixo comum de todas as rotas;
+   * exemplo: em uma url "localhost:8000/mvc/rotas" -> prefixo comum é "/mvc";
+   * @var string
+   */
+  private string $prefix = '';
+  /**
+   * indice de rotas
+   * @var array
+   */
+  private array $routes = [];
+  /**
+   * instância da Request
    * @var Request
    */
   private Request $request;
 
-  /**
-   * url de rota
-   * @var string
-   */
-  private string $url;
-
-  /**
-   * prefixo comum de todas as rotas
-   * @var string
-   */
-  private string $prefix;
-
-  /**
-   * rotas
-   * @var array
-   */
-  private array $routes = [];
-
   public function __construct(string $url){
-    $this->request = new Request();
-    $this->url = $url;
+    $this->request = new Request($this);
+    $this->url     = $url;
     $this->setPrefix();
   }
   /**
-   * método responsável por parsear a url e verificar se há um prefixo comum, caso não, seta como vazio
+   * responsável por setar o prefixo da rota
    */
   private function setPrefix(): void {
-    $parsedUrl = parse_url($this->url);
+   $parsedUrl = parse_url($this->url);
 
-    $this->prefix = $parsedUrl['path'] ?? '';
+   $this->prefix = $parsedUrl['path'] ?? '';
   }
   /**
-   * método responsável por adicionar uma rota no router
+   * adiciona uma rota na classe
    * @param string $method
    * @param string $route
    * @param array  $params
    */
-  private function addRoute($method, $route, $params = []): void {
-    // procura função anonima na rota e caso exista, seta ela em uma chave 'controller';
-    foreach($params as $key => $value) {
+  private function addRoute(string $method, string $route, array $params = []): void {
+    //procura uma função anonima nos parametros(response), caso encontre, seta ela numa chave 'controller'
+    foreach ($params as $key => $value) {
       if($value instanceof Closure) {
         $params['controller'] = $value;
         unset($params[$key]);
@@ -73,88 +71,97 @@ class Router {
       $params['variables'] = $matches[1];
     }
 
-    //regex de validação de url
-    $regPatternUrl = '/^'.str_replace('/','\/',$route).'$/';
-    //adiciona rota;
-    $this->routes[$regPatternUrl][$method] = $params;
+    //padrao de validaçao da url
+    $patternRoute = '/^'.str_replace('/','\/',$route).'$/';
+
+    //add a rota na classe
+    $this->routes[$patternRoute][$method] = $params;
   }
 
   /**
-   * método responsável por retornar uri cortada no prefixo
+   * método que fatia a uri no prefixo
    * @return string
    */
   private function getUri(): string {
-    //uri da request
-    $uri = $this->request->getUri();
-    //caso haja prefixo, corta a uri no mesmo
-    $xUri = strlen($this->prefix) ? explode($this->prefix, $uri) : [$uri];
-    //retorna a uri, sem o prefixo
-    return end($xUri);
+   //uri da request
+   $uri = $this->request->getUri();
+
+   //fatia a uri com o prefixo
+   $xUri = strlen($this->prefix) ? explode($this->prefix,$uri) : [$uri];
+   return end($xUri);
   }
+
   /**
-   * método responsável por validar as rotas e retorná-las, em caso de sucesso
+   * retorna os dados da nossa rota atual
    * @return array
    */
   private function getRoute(): array {
-    //uri cortada
     $uri = $this->getUri();
-    //método http da request
     $httpMethod = $this->request->getMethod();
-
+    //valida as rotas
     foreach ($this->routes as $patternRoute => $method) {
-      //confere se a URI bate com o padrão, ou seja, se ela existe
-      if(preg_match($patternRoute,$uri,$matches)) {
-        //confere se o método está de acordo com a request
-        if(isset($method[$httpMethod])) {
+      //confere se a uri bate com o regex de validação
+      if(preg_match($patternRoute,$uri,$matches)){
+        //confere se rota possui o  método
+        if(isset($method[$httpMethod])){
+          //remove a primeira posição de matches (uri);
           unset($matches[0]);
+
           //variaveis processadas
           $keys = $method[$httpMethod]['variables'];
           $method[$httpMethod]['variables'] = array_combine($keys,$matches);
           $method[$httpMethod]['variables']['request'] = $this->request;
 
+          //retorno dos parametros da rota
           return $method[$httpMethod];
         }
-        //lança exception caso o método não esteja de acordo
+        //Método não encontrado;
         throw new Exception('Método não permitido!', 405);
       }
-      //lança exception caso a url não bata
-      throw new Exception('Url não encontrada', 404);
     }
+    //Caso nenhuma uri bata com o padrão de validação
+    throw new Exception('Url não encontrada!', 404);
   }
 
-  /**
-   * método responsável por executar o roteamento e retornar uma response
-   * @return Response
-   */
   public function run(): Response {
     try {
-      //pega as rotas
+      //obtem a rota atual
       $route = $this->getRoute();
-
-      //caso não haja função de execução(response) lança uma nova exception
-      if(!isset($route['controller'])) throw new Exception('A url não pôde ser processada', 500);
-      //argumentos de função
+      //verifica o controlador
+      if(!isset($route['controller'])) {
+        throw new Exception('Url não pode ser processada', 500);
+      }
+      //argumentos da função
       $args = [];
 
       //Reflection para ordenar os parametros da função
       $controllers = new ReflectionFunction($route['controller']);
-      //ordenação de controllers acontece aqui
+      //ordenação acontece aqui
       foreach ($controllers->getParameters() as $parameter) {
         //pega o nome do parâmetro
-        $param = $parameter->getName();
+        $name = $parameter->getName();
         //seta o parâmetro na variável de array $args criada anteriormente.
-        $args[$param] = $route['variables'][$param];
+        $args[$name] = $route['variables'][$name];
       }
       //retorno como execução da função presente na rota (Response)
       return call_user_func_array($route['controller'],$args);
-    } catch (Exception $ex) {
-      //lança exception no browser
-      return new Response($ex->getCode(),$ex->getMessage());
-    }
+    } catch (Exception $e) {
+      return new Response($e->getCode(), $e->getMessage());
     }
 
-  public function get(string $route, array $params = []) {
+  }
+
+  /**
+   * responsável por definir uma rota de get
+   * @param  string   $route
+   * @param  array    $params
+   * @return Response
+   */
+  public function get(string $route, array $params = []){
     return $this->addRoute('GET', $route, $params);
   }
 
+  public function post(string $route, array $params = []){
+    return $this->addRoute('POST', $route, $params);
+  }
 }

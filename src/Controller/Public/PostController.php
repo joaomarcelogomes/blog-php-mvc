@@ -1,6 +1,6 @@
 <?php
 
-namespace Source\Controller;
+namespace Source\Controller\Public;
 use \Source\UI\View;
 use \Source\Service\PostService;
 use \Source\Model\Post;

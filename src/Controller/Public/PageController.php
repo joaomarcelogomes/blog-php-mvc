@@ -1,7 +1,6 @@
 <?php
 
-namespace Source\Controller;
-
+namespace Source\Controller\Public;
 use \Source\UI\View;
 
 class PageController {

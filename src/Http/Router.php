@@ -157,6 +157,13 @@ class Router {
 
   }
 
+  public function redirect($route): void {
+    $url = $this->url.$route;
+    
+    header('location: '.$url);
+    exit;
+  }
+
   /**
    * responsável por definir uma rota de get
    * @param  string   $route

@@ -1,6 +1,6 @@
 <?php
 
-namespace Source\Controller;
+namespace Source\Controller\Public;
 use \Source\Utils\DB\Pagination;
 use \Source\UI\View;
 

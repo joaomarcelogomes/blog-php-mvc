@@ -79,7 +79,7 @@ class AccessClass {
     $limit = isset($limit) ? ' LIMIT ' . $limit : '';
 
     $query = 'SELECT ' . $fields . ' FROM ' . $this->table . $where . $order . $limit;
-
+  
     return $this->executeQuery($query);
   }
 

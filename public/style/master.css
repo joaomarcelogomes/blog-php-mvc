@@ -51,6 +51,20 @@ hr {
   text-align: center;
 }
 
+.a-img {
+  margin-left: 100px;
+  margin-right: 160px;
+  max-width: 200px;
+  max-height: 50px;
+  display: grid;
+  grid-template-areas: "logo"
+}
+
+.logo {
+  grid-area:"logo";
+  align-self: center;
+}
+
 .ulnav {
   list-style-type: none;
   list-style-position: outside;
@@ -91,13 +105,6 @@ hr {
 
 .nav-item:hover {
   text-decoration: underline;
-}
-
-.logo {
-  height: 180px;
-  flex: 1;
-  padding: 0 20px 0 20px;
-  margin-top: 10px;
 }
 
 .home-title{

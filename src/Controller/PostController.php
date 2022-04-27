@@ -4,6 +4,7 @@ namespace Source\Controller;
 use \Source\UI\View;
 use \Source\Service\PostService;
 use \Source\Model\Post;
+use \Source\Utils\DB\Pagination;
 
 class PostController extends PageController {
 
@@ -20,17 +21,17 @@ class PostController extends PageController {
    * @param  array $posts
    * @return string
    */
-  public static function getPosts(): string {
+  public static function getPosts(int $limit): string {
+    $pagination = new Pagination(self::getService()->countItems(), $limit, $_GET['page']);
     //listagem de posts
-    $posts = self::getService()->list('id DESC');
+    $posts = self::getService()->list('id DESC', $pagination->getLimit());
     $content = '';
     //renderiza o conteúdo de posts
     foreach ($posts as $post) {
-      $content .= View::render('pages/posts/posts', [
+      $content .= View::render('pages/posts/post-list', [
         'id'      => $post->getId(),
         'title'   => $post->getTitle(),
         'content' => substr($post->getContent(), 0, 500) . '...',
-        'date'    => strftime('%d de %B de %Y', strtotime($post->getDate())),
         'img'     => $post->getImg()
       ]);
     }

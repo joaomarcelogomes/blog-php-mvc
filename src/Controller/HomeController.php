@@ -1,6 +1,7 @@
 <?php
 
 namespace Source\Controller;
+use \Source\Utils\DB\Pagination;
 use \Source\UI\View;
 
 class HomeController extends PageController {
@@ -11,7 +12,7 @@ class HomeController extends PageController {
    */
   public static function getHome(): string {
     $content = View::render('pages/home', [
-      'posts' => PostController::getPosts()
+      'posts' => PostController::getPosts(6),
     ]);
 
    return parent::getPage('Home', $content);

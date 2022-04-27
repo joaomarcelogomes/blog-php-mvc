@@ -49,6 +49,16 @@ class PostService {
     return $this->dao->select(null,$order,$limit,$fields)->fetchAll(PDO::FETCH_CLASS, Post::class);
   }
   /**
+   * método responsável por contar a quantidade de posts no banco
+   * @param  string $where
+   * @return int
+   */
+  public function countItems($where = null): int {
+    return $this->dao->select($where,null,null,'COUNT(*) as total')
+                     ->fetchObject()
+                     ->total;
+  }
+  /**
    * implementação do método de busca de 1 registro
    * @param  int  $id
    * @return Post

@@ -1,6 +1,7 @@
 <?php
 
 namespace Source\Http;
+use \Source\Http\Middleware\MiddlewareQueue;
 use \Closure;
 use \Exception;
 use \ReflectionFunction;
@@ -58,6 +59,9 @@ class Router {
         continue;
       }
     }
+    //middlewares da rota
+    $params['middlewares'] = $params['middlewares'] ?? [];
+
     //variaveis da rota
     $params['variables'] = [];
 
@@ -143,8 +147,10 @@ class Router {
         //seta o parâmetro na variável de array $args criada anteriormente.
         $args[$name] = $route['variables'][$name];
       }
-      //retorno como execução da função presente na rota (Response)
-      return call_user_func_array($route['controller'],$args);
+      //inicia uma nova fila de middlewares
+      $middlewareQueue = new MiddlewareQueue($route['middlewares'], $route['controller'], $args);
+      //retorna o avanço a um proximo nivel de execução
+      return $middlewareQueue->next($this->request);
     } catch (Exception $e) {
       return new Response($e->getCode(), $e->getMessage());
     }
@@ -161,14 +167,32 @@ class Router {
     return $this->addRoute('GET', $route, $params);
   }
 
+  /**
+   * responsável por definir uma rota de post
+   * @param  string   $route
+   * @param  array    $params
+   * @return Response
+   */
   public function post(string $route, array $params = []) {
     return $this->addRoute('POST', $route, $params);
   }
 
+  /**
+   * responsável por definir uma rota de put
+   * @param  string   $route
+   * @param  array    $params
+   * @return Response
+   */
   public function put(string $route, array $params = []) {
     return $this->addRoute('PUT', $route, $params);
   }
 
+  /**
+   * responsável por definir uma rota de delete
+   * @param  string   $route
+   * @param  array    $params
+   * @return Response
+   */
   public function delete(string $route, array $params = []) {
     return $this->addRoute('DELETE', $route, $params);
   }

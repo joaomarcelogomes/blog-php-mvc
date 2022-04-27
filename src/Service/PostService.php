@@ -10,7 +10,7 @@ use \PDO;
 /**
  * classe de serviço para o model de Postagem
  */
-class PostService implements ServiceContract {
+class PostService {
 
   /**
    * objeto de acesso ao banco de dados
@@ -29,11 +29,12 @@ class PostService implements ServiceContract {
    * @param  Post $post
    * @return int
    */
-  public function create($post): int {
+  public function create(array $post = []): int {
     return $this->dao->insert([
-      'title'   => $post->getTitle(),
-      'content' => $post->getContent(),
-      'date'    => date('Y-m-s H:i:s')
+      'title'   => $post['title'],
+      'content' => $post['content'],
+      'img'     => $post['img'],
+      'date'    => date('Y-m-d H:i:s')
     ]);
   }
 

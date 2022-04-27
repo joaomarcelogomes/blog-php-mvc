@@ -24,5 +24,16 @@ $router->get('/post/{id}', [
   }
 ]);
 
+$router->get('/admin/new_post', [
+  function() {
+    return new Response(200, PostController::newPost());
+  }
+]);
+
+$router->post('/admin/new_post', [
+  function($request) {
+    return new Response(200, PostController::newPost($request));
+  }
+]);
 //execução de respostas;
 $router->run()->sendResponse();

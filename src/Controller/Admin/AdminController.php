@@ -8,6 +8,9 @@ use \Source\Service\AdminService;
 use \Source\Model\Post;
 use \Source\Utils\Session\Admin\Login;
 
+/**
+ * classe responsável por controlar o painel de administração
+ */
 class AdminController extends PageController {
 
   /**

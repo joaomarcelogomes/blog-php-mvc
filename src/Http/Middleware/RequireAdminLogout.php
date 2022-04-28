@@ -7,6 +7,12 @@ use \Source\Http\Response;
 
 class RequireAdminLogout {
 
+  /**
+   * método comum de todos os middlewares
+   * @param  Request   $request
+   * @param  Response   $next
+   * @return Response
+   */
   public static function handle($request, $next): Response {
     //verifica se o usuário está logado
     if(Login::isLogged()) {

@@ -7,8 +7,16 @@ use \Source\Utils\DB\AccessClass;
 use \Source\Utils\DB\Connection;
 use \PDO;
 
+/**
+ * classe de serviço de Admin, responsável por executar as operações de CRUD
+ * relacionadas a esta classe
+ */
 class AdminService {
 
+  /**
+   * data access object
+   * @var AccessClass
+   */
   private AccessClass $dao;
 
   public function __construct(){

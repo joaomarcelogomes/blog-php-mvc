@@ -60,7 +60,7 @@ class Request {
 
    $this->uri = $xUri[0];
   }
-
+  
   public function getRouter(): Router {
    return $this->router;
   }

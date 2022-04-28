@@ -157,6 +157,10 @@ class Router {
 
   }
 
+  /**
+   * retorna a url atual do site sem os queryparams;
+   * @return string
+   */
   public function getCurrentUrl(): string {
     return $this->url.$this->getUri();
   }

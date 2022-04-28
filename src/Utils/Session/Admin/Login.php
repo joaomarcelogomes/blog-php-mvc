@@ -56,7 +56,10 @@ class Login {
 
     return true;
   }
-
+  /**
+   * método responsável por retornar o usuário logado
+   * @return array
+   */
   public static function getLogged(): array {
     self::startSession();
    return $_SESSION['admin']['user'];

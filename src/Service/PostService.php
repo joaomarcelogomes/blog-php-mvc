@@ -26,7 +26,7 @@ class PostService {
   }
   /**
    * implementação do método responsável pela inserção no banco
-   * @param  Post $post
+   * @param  array $post
    * @return int
    */
   public function create(array $post = []): int {

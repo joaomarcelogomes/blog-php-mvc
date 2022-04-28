@@ -1,11 +1,8 @@
 <?php
 
-require 'vendor/autoload.php';
-use \Source\Http\Router;
 use \Source\Http\Response;
 use \Source\Controller\Admin\LoginController;
 use \Source\Controller\Admin\AdminController;
-use \Source\Controller\Public\PostController;
 
 //rota home admin
 $router->get('/admin', [

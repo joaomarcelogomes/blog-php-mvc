@@ -2,8 +2,10 @@
 
 namespace Source\Model;
 
+/**
+ * classe modelo de entidade de Admin
+ */
 class Admin {
-
   /**
    * id do admin
    * @var int
@@ -24,7 +26,7 @@ class Admin {
    * @var string
    */
   private string $password;
-
+  
   public function getId(): int {
    return $this->id;
   }

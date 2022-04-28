@@ -50,14 +50,16 @@ class PostController extends PageController {
    * @return Post
    */
   public static function getPost($id): string {
+    //busca o post no banco através do id
     $post = self::getService()->load($id);
+    //renderiza a página de post com o post retornado
     $content = View::render('pages/posts/post', [
       'title'   => $post->getTitle(),
       'date'    => strftime('%B %d, %Y', strtotime($post->getDate())),
       'content' => $post->getContent(),
       'img'     => $post->getImg(),
     ]);
-
+    //retorna página montada
     return parent::getPage($post->getTitle(), $content);
   }
 

@@ -1,7 +1,5 @@
 <?php
 
-require 'vendor/autoload.php';
-
 use \Source\Http\Router;
 
 //instância de novo router

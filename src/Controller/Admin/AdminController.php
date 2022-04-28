@@ -82,7 +82,7 @@ class AdminController extends PageController {
       $request->getRouter()->redirect('/admin');
     }
     //renderiza a página de registro
-    $content = View::render('admin/new-user');
+    $content = View::render('admin/user/new-user');
 
     //retorna a página generica com o conteúdo
     return parent::getPage('Novo usuário', $content);

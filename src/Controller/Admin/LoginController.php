@@ -24,7 +24,7 @@ class LoginController extends PageController {
    * @return string
    */
   public static function getLogin($request): string {
-    $content = View::render('admin/login', []);
+    $content = View::render('admin/user/login', []);
     return parent::getPage('Login', $content);
   }
   /**

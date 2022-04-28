@@ -90,7 +90,7 @@ class PostController extends PageController {
     $newName = md5(time()) . $extension;
 
     //pega o diretório onde os arquivos serão salvos
-    $dir = __DIR__.'/../../resources/upload/';
+    $dir = __DIR__.'/../../../resources/upload/';
 
     //move a imagem em questão para o diretório
     move_uploaded_file($img['tmp_name'], $dir.$newName);

@@ -6,6 +6,7 @@ use \Source\UI\View;
 use \Source\Service\AdminService;
 use \Source\Utils\Session\Admin\Login;
 use \Source\Model\Admin;
+use \Source\Http\Request;
 
 class LoginController extends PageController {
 
@@ -17,13 +18,21 @@ class LoginController extends PageController {
     return new AdminService();
   }
 
-
+  /**
+   * método responsável por renderizar a página de login
+   * @param  Request $request
+   * @return string
+   */
   public static function getLogin($request): string {
     $content = View::render('admin/login', []);
     return parent::getPage('Login', $content);
   }
-
-  public static function setLogin($request): Request {
+  /**
+   * método responsável por executar o login do admin
+   * @param  Request $request
+   * @return mixed
+   */
+  public static function setLogin($request): mixed {
       $vars  = $request->getPostVars();
 
       $email = $vars['email'] ?? '';
@@ -34,9 +43,19 @@ class LoginController extends PageController {
       if(!$admin instanceof Admin || !password_verify($pass,$admin->getPassword())) {
         return self::getLogin($request);
       }
-
+      
       Login::login($admin);
 
       $request->getRouter()->redirect('/admin');
+  }
+
+  /**
+   * método responsável por deslogar o admin
+   * @param Request $request
+   */
+  public static function setLogout($request): void {
+    Login::logout();
+
+    $request->getRouter()->redirect('/admin/login');
   }
 }

@@ -5,15 +5,15 @@ namespace Source\Http\Middleware;
 use \Source\Utils\Session\Admin\Login;
 use \Source\Http\Response;
 
-class RequireAdminLogout {
+class RequireAdminLogin {
 
   public static function handle($request, $next): Response {
     //verifica se o usuário está logado
-    if(Login::isLogged()) {
-      //redireciona para admin caso esteja logado
-      $request->getRouter()->redirect('/admin');
+    if(!Login::isLogged()) {
+      //redireciona para a página de login caso não esteja logado
+      $request->getRouter()->redirect('/admin/login');
     }
-    //continua execução
+    //continua a execução
     return $next($request);
   }
 

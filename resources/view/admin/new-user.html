@@ -1,0 +1,29 @@
+<h1 align="center" class="home-title">Novo usuário</h1>
+<div class="above-form">
+  <form class="form" action="/admin/new_user" method="post">
+    <div class="form-group">
+      <label for="title">Nome</label>
+      <input type="text" name="name" placeholder="Nome do admin" class="ipt-title" required>
+    </div>
+    <div class="form-group">
+      <label for="content">Email</label>
+      <input type="email" name="email" placeholder="admin@email.com" class="ipt-title" required>
+    </div>
+    <div class="form-group">
+      <label for="content">Senha</label>
+      <input type="password" name="password" placeholder="********" class="ipt-title" required>
+    </div>
+    <div class="form-group">
+      <label for="content">Confirmação de senha</label>
+      <input type="password" name="password-confirmation" placeholder="********" class="ipt-title" required>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="ipt-btn send-btn new-user-btn">Registrar</button>
+    </div>
+    <div class="form-group">
+      <a href="/admin">
+        <button type="button" class="ipt-btn del-btn">Cancelar</button>
+      </a>
+    </div>
+  </form>
+</div>

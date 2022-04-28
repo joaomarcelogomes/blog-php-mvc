@@ -157,9 +157,17 @@ class Router {
 
   }
 
+  public function getCurrentUrl(): string {
+    return $this->url.$this->getUri();
+  }
+
+  /**
+   * método responsável por redirecionar para uma rota indicada
+   * @param string $route
+   */
   public function redirect($route): void {
     $url = $this->url.$route;
-    
+
     header('location: '.$url);
     exit;
   }
@@ -182,25 +190,5 @@ class Router {
    */
   public function post(string $route, array $params = []) {
     return $this->addRoute('POST', $route, $params);
-  }
-
-  /**
-   * responsável por definir uma rota de put
-   * @param  string   $route
-   * @param  array    $params
-   * @return Response
-   */
-  public function put(string $route, array $params = []) {
-    return $this->addRoute('PUT', $route, $params);
-  }
-
-  /**
-   * responsável por definir uma rota de delete
-   * @param  string   $route
-   * @param  array    $params
-   * @return Response
-   */
-  public function delete(string $route, array $params = []) {
-    return $this->addRoute('DELETE', $route, $params);
   }
 }

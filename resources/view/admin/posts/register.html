@@ -1,0 +1,25 @@
+<h1 align="center" class="home-title">Nova Postagem</h1>
+<div class="above-form">
+  <form class="form" action="/admin/new_post"  enctype="multipart/form-data" method="post">
+    <div class="form-group">
+      <label for="title">Título do artigo</label>
+      <input type="text" name="title" value="" class="ipt-title" required>
+    </div>
+    <div class="form-group">
+      <label for="content">Corpo do artigo</label>
+      <textarea name="content" rows="20" cols="80" class="ipt-content" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="content" class="label-img">Imagem</label>
+      <input type="file" name="post_img" class="ipt-img" required>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="ipt-btn send-btn">Enviar</button>
+    </div>
+    <div class="form-group">
+      <a href="/admin">
+        <button type="button" class="ipt-btn del-btn">Cancelar</button>
+      </a>
+    </div>
+  </form>
+</div>

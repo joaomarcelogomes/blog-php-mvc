@@ -12,8 +12,8 @@ use \Source\Controller\Public\PostController;
 
 //rota home
 $router->get('/', [
-  function() {
-    return new Response(200, HomeController::getHome());
+  function($request) {
+    return new Response(200, HomeController::getHome($request));
   }
 ]);
 

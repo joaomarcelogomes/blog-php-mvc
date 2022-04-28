@@ -1,0 +1,26 @@
+<h1 align="center" class="home-title">Editar Postagem</h1>
+<img src="../../{{post-img}}" alt="imagem atual da postagem" class="post-image">
+<div class="above-form">
+  <form class="form" action="/admin/edit_post/{{id}}"  enctype="multipart/form-data" method="post">
+    <div class="form-group">
+      <label for="title">Título do artigo</label>
+      <input type="text" name="title" class="ipt-title" value="{{post-title}}" required>
+    </div>
+    <div class="form-group">
+      <label for="content">Corpo do artigo</label>
+      <textarea name="content" rows="20" cols="80" class="ipt-content" required>{{post-content}}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="content" class="label-img">Imagem</label>
+      <input type="file" name="post_img" class="ipt-img">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="ipt-btn send-btn">Enviar</button>
+    </div>
+    <div class="form-group">
+      <a href="/admin">
+        <button type="button" class="ipt-btn del-btn">Cancelar</button>
+      </a>
+    </div>
+  </form>
+</div>

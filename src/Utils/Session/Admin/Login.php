@@ -56,4 +56,9 @@ class Login {
 
     return true;
   }
+
+  public static function getLogged(): array {
+    self::startSession();
+   return $_SESSION['admin']['user'];
+  }
 }

@@ -38,4 +38,31 @@ class PageController {
     ]);
   }
 
+  public static function getPagination($request, $pagination): string {
+    $pages = $pagination->getPages();
+
+    if(count($pages) <= 1) return '';
+
+    $links = '';
+
+    $url = $request->getRouter()->getCurrentUrl();
+
+    $queryParams = $request->getQueryParams();
+
+    foreach ($pages as $page) {
+      $queryParams['page'] = $page['page'];
+
+      $link = $url.'?'.http_build_query($queryParams);
+
+      $links .= View::render('pages/pagination/link', [
+        'link' => $link,
+        'page' => $page['page']
+      ]);
+    }
+    
+    return View::render('pages/pagination/box', [
+      'pages' => $links,
+    ]);
+  }
+
 }

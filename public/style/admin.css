@@ -8,6 +8,20 @@ body{
   background-color: #2E4757;
   display: flex;
   justify-content: center;
+  margin: 0 30px 0 30px;
+}
+
+.admin-home-head {
+  padding-left: 40px;
+  padding-top: 45px;
+}
+
+.home-title{
+  margin-left: 10px;
+  margin-bottom: 25px;
+  font-weight: 500;
+  font-size: 20px;
+  color: #2E4757;
 }
 
 .card {
@@ -20,26 +34,32 @@ body{
 }
 
 .card-header {
+  margin-bottom: 0
   padding: 20px;
   font-weight: 300;
   color: #2E4757;
 }
 
+.login-title {
+  padding: 5px;
+}
+
 .card-body {
-  margin-top: 5px;
   padding: 20px;
 }
 
 .form-group {
-  padding: 20px;
+  padding: 10px;
+  margin: 0px;
 }
 
 .form-control {
-  padding: 5px;
+  /* padding: 5px; */
   width: 300px;
 }
 
 .pass, .email {
+  max-width: 200px;
   margin: 10px 0px 10px 0px;
 }
 
@@ -60,4 +80,265 @@ body{
   padding: 0 20px 0 20px;
   cursor: pointer;
   box-shadow: 0px 0px 3px #2E4757;
+}
+
+/* =========================================================================================== */
+
+.box {
+  justify-content: center;
+}
+
+.post-container {
+  padding: 50px;
+}
+
+.post-list-item {
+  margin-top: 20px;
+  list-style-type: none;
+  list-style: none;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-item-title {
+  color: #FE5000;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.post-item-content {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.btn-pat {
+  color: white;
+  margin: 2px;
+  text-decoration: none;
+  padding: 5px 10px 5px 10px;
+  width: 35px;
+  font-size: 13px;
+  border-radius: 5px;
+}
+
+.btn-pat:hover {
+  text-decoration: none;
+  padding: 5px 10px 5px 10px;
+  width: 35px;
+  font-size: 13px;
+}
+
+.post-update-btn {
+  background-color: #0093FF;
+}
+
+.post-update-btn:hover {
+  background-color: white;
+  color: #0093FF;
+  border: 1px solid #0093FF;
+}
+
+.post-delete-btn {
+  background-color: #FF2D00;
+  margin-bottom: 20px;
+}
+
+.post-delete-btn:hover {
+  background-color: white;
+  color: #FF2D00;
+  border: 1px solid #FF2D00;
+}
+
+.menu-btn {
+  background-color: #0093FF;
+  font-size: 15px;
+  padding-left: 0 30px 0 30px;
+}
+
+.new-post-btn {
+  margin-left: 48px;
+}
+
+.new-post-btn:hover, .new-user-btn:hover {
+  font-size: 15px;
+  background-color: white;
+  color: #0093FF;
+  border: 1px solid #0093FF;
+}
+
+.new-user-btn {
+  margin-left: 800px;
+}
+
+.logout-btn {
+  background-color: grey;
+  margin-left: 10px;
+}
+
+.logout-btn:hover {
+  font-size: 15px;
+  background-color: white;
+  color: grey;
+  border: 1px solid grey;
+}
+
+/* ======================================================================================== */
+
+.above-form{
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+input[type=text], select, textarea, input[type=email], input[type=password] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+.container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.ipt-btn {
+  color: white;
+  height: 40px;
+  width: 217px;
+  border-radius: 10px;
+  padding: 0 20px 0 20px;
+}
+
+.ipt-btn:hover {
+  background-color: white;
+  height: 40px;
+  width: 217px;
+  border-radius: 10px;
+  padding: 0 20px 0 20px;
+  cursor: pointer;
+}
+
+.label {
+  margin-left: 50px;
+}
+
+.del-btn {
+  background-color: grey;
+  padding: 0;
+  margin-left: 10px;
+  text-decoration: none;
+  width: 400px;
+  font-size: 13px;
+  border: 1px solid grey;
+}
+
+.del-btn:hover {
+  background-color: white;
+  color: grey;
+  text-decoration: none;
+  width: 400px;
+  font-size: 13px;
+  border: 1px solid grey;
+}
+
+.exclude-btn {
+  background-color: #FE5000;
+  padding: 0;
+  margin-left: 10px;
+  text-decoration: none;
+  width: 400px;
+  font-size: 13px;
+  border: 1px solid #FE5000;
+}
+
+.exclude-btn:hover {
+  color: #FE5000;
+  background-color: white;
+  padding: 0;
+  margin-left: 10px;
+  text-decoration: none;
+  width: 400px;
+  font-size: 13px;
+  border: 1px solid #FE5000;
+}
+
+.send-btn {
+  background-color: #09B785;
+  padding: 0;
+  margin-left: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+  width: 400px;
+  font-size: 13px;
+  border: 1px solid #09B785;
+}
+
+.send-btn:hover {
+  background-color: white;
+  color: #09B785;
+  text-decoration: none;
+  width: 400px;
+  font-size: 13px;
+  border: 1px solid #09B785;
+}
+
+.cancel {
+  text-decoration: none;
+  padding: 10px 80px 10px 80px;
+  width: 217px;
+  font-size: 13px;
+}
+
+.cancel:hover {
+  text-decoration: none;
+  padding: 10px 80px 10px 80px;
+  width: 217px;
+  font-size: 13px;
+}
+
+.post-image {
+  margin-top: 30px;
+  width: 100%;
+  height: 500px;
+  object-fit: fill;
+  grid-area: "img";
 }

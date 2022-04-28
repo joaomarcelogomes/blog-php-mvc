@@ -82,7 +82,7 @@ class Request {
   }
 
   public function getQueryParams(): array {
-   return $this->queryParam;
+   return $this->queryParams;
   }
 
 

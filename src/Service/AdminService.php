@@ -23,4 +23,17 @@ class AdminService {
     return $this->dao->select('email=\''.$email.'\'')->fetchObject(Admin::class);
   }
 
+    /**
+     * implementação do método responsável pela inserção no banco
+     * @param  Admin $post
+     * @return int
+     */
+    public function create(array $admin = []): int {
+      return $this->dao->insert([
+        'name'     => $admin['name'],
+        'email'    => $admin['email'],
+        'password' => password_hash($admin['password'], PASSWORD_DEFAULT)
+      ]);
+    }
+
 }

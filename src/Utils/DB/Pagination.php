@@ -44,7 +44,7 @@ class Pagination {
     for($i = 1; $i <= $this->pages; $i++) {
       $pages[] = [
         'page'    => $i,
-        'current' => $this->currentPage
+        'current' => $i === $this->currentPage 
       ];
     }
     return $pages;

@@ -43,7 +43,7 @@ class LoginController extends PageController {
       if(!$admin instanceof Admin || !password_verify($pass,$admin->getPassword())) {
         return self::getLogin($request);
       }
-      
+
       Login::login($admin);
 
       $request->getRouter()->redirect('/admin');

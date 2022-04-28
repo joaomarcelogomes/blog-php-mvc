@@ -6,6 +6,7 @@ use \Source\UI\View;
 use \Source\Service\PostService;
 use \Source\Service\AdminService;
 use \Source\Model\Post;
+use \Source\Model\Admin;
 use \Source\Utils\Session\Admin\Login;
 
 /**
@@ -77,10 +78,18 @@ class AdminController extends PageController {
     if(isset($request)) {
       //pega o array de variáveis post
       $vars = $request->getPostVars();
+      //verifica se as senhas coincidem
       if($vars['password'] != $vars['password-confirmation'])
-          $request->getRouter()->redirect('/admin/new_user');
+        $request->getRouter()->redirect('/admin/new_user');
+
+      //cria nova instancia de admin
+      $obAdmin = new Admin();
+      $obAdmin->setName($vars['name']);
+      $obAdmin->setEmail($vars['email']);
+      $obAdmin->setPassword($vars['password']);
+
       //insere o registro no banco
-      self::getService()->create($vars);
+      self::getService()->create($obAdmin);
       //redireciona para a página de administração após a execução da ação
       $request->getRouter()->redirect('/admin');
     }
@@ -98,12 +107,16 @@ class AdminController extends PageController {
    */
   public static function createPost($request = null): string {
     if(isset($request)) {
-      //pega o array de variáveis post
+      //pega o array de variáveis do método post
       $vars = $request->getPostVars();
-      //salva a imagem no arquivo resources/upload e seta a mesma no array em 'img';
-      $vars['img'] = self::getImgUploaded();
+      //cria uma nova instancia de postagem com as variáveis recebidas
+      $obPost = new Post();
+      $obPost->setTitle($vars['title']);
+      $obPost->setContent($vars['content']);
+      //salva a imagem no arquivo resources/upload e seta a mesma no objeto de post;
+      $obPost->setImg(self::getImgUploaded());
       //insere o registro no banco
-      self::getPostService()->create($vars);
+      self::getPostService()->create($obPost);
       //redireciona para a página de administração após a execução da ação
       $request->getRouter()->redirect('/admin');
     }
@@ -116,25 +129,27 @@ class AdminController extends PageController {
 
   public static function updatePost($id, $request = null): string {
     //chama o objeto do banco
-    $obToUpdate = self::getPostService()->load($id);
+    $obPostToUpdate = self::getPostService()->load($id);
     //renderiza a página de registro
     $content = View::render('admin/posts/update', [
-      'id'           => $id,
-      'post-img'     => $obToUpdate->getImg(),
-      'post-title'   => $obToUpdate->getTitle(),
-      'post-content' => $obToUpdate->getContent()
+      'id'           => $obPostToUpdate->getId(),
+      'post-img'     => $obPostToUpdate->getImg(),
+      'post-title'   => $obPostToUpdate->getTitle(),
+      'post-content' => $obPostToUpdate->getContent()
     ]);
 
     if(isset($request)) {
       //pega o array de variáveis post
       $vars = $request->getPostVars();
-      //pega a imagem upada
-      $img = self::getImgUploaded();
+      //seta as propriedades no objeto recuperado;
+      $obPostToUpdate->setTitle($vars['title']);
+      $obPostToUpdate->setContent($vars['content']);
       //salva a imagem no arquivo resources/upload e seta a mesma no array em 'img';
       //caso o usuário não tenha upado nenhuma imagem, pega a imagem que já existia no objeto
-      $vars['img'] = in_array('.', str_split($img)) ? $img : $obToUpdate->getImg();
+      $img = in_array('.', str_split(self::getImgUploaded())) ? self::getImgUploaded() : $obPostToUpdate->getImg();
+      $obPostToUpdate->setImg($img);
       //altera o registro no banco
-      self::getPostService()->update($id, $vars);
+      self::getPostService()->update($obPostToUpdate);
       //redireciona para a página de administração após a execução da ação
       $request->getRouter()->redirect('/admin');
     }
@@ -150,7 +165,6 @@ class AdminController extends PageController {
     $content = View::render('admin/posts/delete', [
       'id'           => $id,
       'post-title'   => $obToUpdate->getTitle(),
-      'post-content' => $obToUpdate->getContent()
     ]);
 
     if(isset($request)) {

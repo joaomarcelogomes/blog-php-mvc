@@ -26,7 +26,7 @@ class Admin {
    * @var string
    */
   private string $password;
-  
+
   public function getId(): int {
    return $this->id;
   }
@@ -41,5 +41,22 @@ class Admin {
 
   public function getPassword(): string {
    return $this->password;
+  }
+
+  public function setId($id): void {
+    $this->id = $id;
+  }
+
+  public function setName($name): void {
+   $this->name = $name;
+  }
+
+  public function setEmail($email): void {
+   $this->email = $email;
+  }
+
+  public function setPassword($password): void {
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $this->password = $password;
   }
 }

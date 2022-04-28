@@ -26,14 +26,14 @@ class PostService {
   }
   /**
    * implementação do método responsável pela inserção no banco
-   * @param  array $post
+   * @param  Post $post
    * @return int
    */
-  public function create(array $post = []): int {
+  public function create($post): int {
     return $this->dao->insert([
-      'title'   => $post['title'],
-      'content' => $post['content'],
-      'img'     => $post['img'],
+      'title'   => $post->getTitle(),
+      'content' => $post->getContent(),
+      'img'     => $post->getImg(),
       'date'    => date('Y-m-d H:i:s')
     ]);
   }
@@ -69,11 +69,15 @@ class PostService {
   /**
    * implementação do método de atualização
    * @param  int   $id
-   * @param  array $values
+   * @param  Post $values
    * @return bool
    */
-  public function update(int $id, array $values): bool {
-    return $this->dao->update($id,$values);
+  public function update(Post $post): bool {
+    return $this->dao->update($post->getId(),[
+      'title'   => $post->getTitle(),
+      'content' => $post->getContent(),
+      'img'     => $post->getImg()
+    ]);
   }
   /**
    * implementação do método de remoção de registro

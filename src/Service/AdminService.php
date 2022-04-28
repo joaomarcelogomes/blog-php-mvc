@@ -19,6 +19,7 @@ class AdminService {
    */
   private AccessClass $dao;
 
+
   public function __construct(){
    $this->dao = new AccessClass('admin', new Connection);
   }
@@ -33,14 +34,14 @@ class AdminService {
 
     /**
      * implementação do método responsável pela inserção no banco
-     * @param  Admin $post
+     * @param  Admin $admin
      * @return int
      */
-    public function create(array $admin = []): int {
+    public function create($admin): int {
       return $this->dao->insert([
-        'name'     => $admin['name'],
-        'email'    => $admin['email'],
-        'password' => password_hash($admin['password'], PASSWORD_DEFAULT)
+        'name'     => $admin->getName(),
+        'email'    => $admin->getEmail(),
+        'password' => $admin->getPassword()
       ]);
     }
 

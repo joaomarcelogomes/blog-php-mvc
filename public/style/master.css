@@ -1,4 +1,4 @@
-*{
+* {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
@@ -29,54 +29,44 @@ hr {
 }
 
 .navbar {
-  position:fixed;
   grid-area: "nav";
+  position:fixed;
   background-color: white;
   height: 80px;
   width: 100%;
   top: 0;
   left: 0;
-  bottom: 100;
   font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 5px 5px 5px 0 #9DB2C1;
+  box-shadow: 0 0 5px 0 #9DB2C1;
 }
 
-.links {
-  width: 20px;
-  text-decoration: none solid rgb(0,0,0);
+.message-link {
+  max-width: 217px;
   flex: 1 1 auto;
   text-align: center;
+  margin-right: 100px;
+  margin-left: 150px;
 }
 
 .a-img {
   margin-left: 100px;
-  margin-right: 160px;
-  max-width: 200px;
-  max-height: 50px;
-  display: grid;
+  margin-right: 200px;
+  margin-top: 5px;
   grid-template-areas: "logo"
-}
-
-.logo {
-  grid-area:"logo";
-  align-self: center;
 }
 
 .ulnav {
   list-style-type: none;
-  list-style-position: outside;
-  width: 20px;
+  max-width: 300px;
   flex: 1 1 auto;
   display: flex;
-  align-items: center;
   justify-content: space-around;
-  text-align: center;
 }
 
-.btn-message{
+.btn-message {
   color: grey;
   background-color: white;
   border: 1px solid #FE5000;
@@ -107,7 +97,7 @@ hr {
   text-decoration: underline;
 }
 
-.home-title{
+.home-title {
   margin-top: 120px;
   font-weight: 300;
   color: #2E4757;

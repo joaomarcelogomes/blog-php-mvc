@@ -49,5 +49,4 @@ class Form {
      //caso equals seja true, retorna o método de validação padrão, caso não, lança um alerta.
      return equals ? this.validate(formId,'input') : alert("As senhas não coincidem");
   }
-
 }

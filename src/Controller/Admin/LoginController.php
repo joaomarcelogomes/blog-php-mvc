@@ -24,11 +24,17 @@ class LoginController extends PageController {
   /**
    * método responsável por renderizar a página de login
    * @param  Request $request
+   * @param  string $error
    * @return string
    */
-  public static function getLogin($request): string {
+  public static function getLogin($request, $error = null): string {
+    $message = $error ? View::render('admin/user/error-message', [
+      'error' => $error,
+    ]) : '';
     //renderiza o conteúdo da página de login
-    $content = View::render('admin/user/login', []);
+    $content = View::render('admin/user/login', [
+      'error' => $message
+    ]);
     //retorna a página renderizada
     return parent::getPage('Login', $content);
   }
@@ -47,7 +53,7 @@ class LoginController extends PageController {
       $admin = self::getService()->getAdmin($email);
       //verifica se as credenciais estão corretas
       if(!$admin instanceof Admin || !password_verify($pass,$admin->getPassword())) {
-        return self::getLogin($request);
+        return self::getLogin($request, 'Email ou senha incorretos');
       }
       //loga o usuário
       Login::login($admin);

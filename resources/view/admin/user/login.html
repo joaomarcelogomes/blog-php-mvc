@@ -1,5 +1,6 @@
 <h1 align="center" class="home-title">Login</h1>
-  <form class="form" action="/admin/login" method="post">
+  {{error}}
+  <form id="login-form" class="form" action="/admin/login" method="post">
     <div class="form-group">
       <label for="content">Email</label>
       <input type="email" name="email" placeholder="admin@email.com" class="ipt-title" required>

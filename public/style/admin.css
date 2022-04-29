@@ -40,6 +40,17 @@ body{
   color: #2E4757;
 }
 
+#error-message {
+  margin-left: 30px;
+  width: 410px;
+  padding: 5px;
+  font-size: 13px;
+  background-color: #F5B7B1;
+  color: #9A1A03;
+  border: 1px solid #9A1A03;
+  border-radius: 3px;
+}
+
 .login-title {
   padding: 5px;
 }

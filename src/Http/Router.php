@@ -2,6 +2,7 @@
 
 namespace Source\Http;
 use \Source\Http\Middleware\MiddlewareQueue;
+use \Source\Controller\Public\PageController;
 use \Closure;
 use \Exception;
 use \ReflectionFunction;
@@ -152,7 +153,7 @@ class Router {
       //retorna o avanço a um proximo nivel de execução
       return $middlewareQueue->next($this->request);
     } catch (Exception $e) {
-      return new Response($e->getCode(), $e->getMessage());
+      return new Response($e->getCode(), PageController::getError($e->getCode(), $e->getMessage()));
     }
 
   }

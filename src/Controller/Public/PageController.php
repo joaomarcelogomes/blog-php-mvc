@@ -72,4 +72,17 @@ class PageController {
     ]);
   }
 
+  /**
+   * método responsável por renderizar uma página de erro
+   * @param  string $title
+   * @param  string $message
+   * @return string
+   */
+  public static function getError($title, $message): string {
+    return View::render('pages/error', [
+      'title'   => $title,
+      'message' => $message
+    ]);
+  }
+
 }

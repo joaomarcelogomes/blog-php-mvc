@@ -1,19 +1,20 @@
 <h1 align="center" class="home-title">Nova Postagem</h1>
-  <form class="form" action="/admin/new_post"  enctype="multipart/form-data" method="post">
+  <form id="form-register" class="form" action="/admin/new_post"  enctype="multipart/form-data" method="post">
     <div class="form-group">
       <label for="title">Título do artigo</label>
-      <input type="text" name="title" value="" class="ipt-title" required>
+      <input type="text" name="title" class="ipt-title">
     </div>
     <div class="form-group">
       <label for="content">Corpo do artigo</label>
-      <textarea name="content" rows="20" cols="80" class="ipt-content" required></textarea>
+      <textarea name="content" rows="20" cols="80" class="ipt-content"></textarea>
     </div>
     <div class="form-group">
       <label for="content" class="label-img">Imagem</label>
-      <input type="file" name="post_img" class="ipt-img" required>
+      <input type="file" name="post_img" class="ipt-img">
     </div>
     <div class="form-group">
-      <button type="submit" id="new-post-btn" class="ipt-btn send-btn">Enviar</button>
+      <button type="button" onclick="Form.validate('form-register','input','textarea')" id="new-post-btn"
+      class="ipt-btn send-btn">Enviar</button>
     </div>
     <div class="form-group">
       <a href="/admin">
